@@ -33,7 +33,7 @@ app.post('/api/bands', async (req, res) => {
   }
 });
 
-connectDatabase(process.env.MONGODB_URL).then(() => {
+app.connectDatabase(process.env.MONGODB_URL).then(() => {
   app.listen(port, () => {
     console.log('Is fertichhh');
   });
