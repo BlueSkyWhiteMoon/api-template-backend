@@ -21,14 +21,14 @@ app.get('/', (_req, res) => {
 app.post('/api/bands', async (req, res) => {
   const newBand = req.body;
   const existingBand = await getBandCollection().findOne({
-    name: newBand.name,
+    Bandname: newBand.Bandname,
   });
   if (existingBand) {
-    res.status(409).send(`${newBand.name} already exists in the Database!`);
+    res.status(409).send(`${newBand.Bandname} already exists in the Database!`);
   } else {
     const insertedBand = await getBandCollection().insertOne(newBand);
     res.send(
-      `${newBand.name} added to the Database with the id ${insertedBand.insertedId}!`
+      `${newBand.Bandname} added to the Database with the id ${insertedBand.insertedId}!`
     );
   }
 });
@@ -67,6 +67,19 @@ app.get('/api/bands/:bandname/members', async (req, res) => {
 
   if (band) {
     res.send(band.Members);
+  } else {
+    res.status(404).send(`Couldn't find band ${bandname}`);
+  }
+});
+
+app.delete('/api/bands/:bandname', async (req, res) => {
+  const bandname = req.params.bandname;
+  const deletedBand = await getBandCollection().deleteOne({
+    Bandname: bandname,
+  });
+
+  if (deletedBand.deletedCount !== 0) {
+    res.send(`${bandname} is deleted`);
   } else {
     res.status(404).send(`Couldn't find band ${bandname}`);
   }

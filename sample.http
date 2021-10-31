@@ -48,4 +48,8 @@ GET http://localhost:3000/api/bands/founded/1973 HTTP/1.1
 
 ### Get all band members
 
-GET http://localhost:3000/api/bands/AC%2FDC/members
+GET http://localhost:3000/api/bands/AC%2FDC/members HTTP/1.1
+
+### Delete one band
+
+DELETE http://localhost:3000/api/bands/AC%2FDC HTTP/1.1
