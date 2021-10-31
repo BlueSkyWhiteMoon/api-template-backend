@@ -85,6 +85,21 @@ app.delete('/api/bands/:bandname', async (req, res) => {
   }
 });
 
+app.patch('/api/bands/:bandname/Genre', async (req, res) => {
+  const bandname = req.params.bandname;
+  const newGenre = req.body.Genre;
+  const updatedBand = await getBandCollection().updateOne(
+    { Bandname: bandname },
+    { $push: { Genre: newGenre } }
+  );
+
+  if (updatedBand.modifiedCount !== 0) {
+    res.send(`Genre of ${bandname} was expanded to include ${newGenre}`);
+  } else {
+    res.send('Nothing was modified');
+  }
+});
+
 connectDatabase(process.env.MONGODB_URL).then(() => {
   app.listen(port, () => {
     console.log('Is fertichhh');
