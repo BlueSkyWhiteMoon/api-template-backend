@@ -33,6 +33,11 @@ app.post('/api/bands', async (req, res) => {
   }
 });
 
+app.get('/api/bands', async (_req, res) => {
+  const allBands = await getBandCollection().find().toArray();
+  res.send(allBands);
+});
+
 connectDatabase(process.env.MONGODB_URL).then(() => {
   app.listen(port, () => {
     console.log('Is fertichhh');
