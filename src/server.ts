@@ -54,10 +54,21 @@ app.get('/api/bands/founded/:foundingYear', async (req, res) => {
   const bands = await getBandCollection()
     .find({ 'founding year': foundingYear })
     .toArray();
-  if (bands) {
+  if (bands.length > 0) {
     res.send(bands);
   } else {
     res.status(404).send(`Couldn't find a band founded in ${foundingYear}`);
+  }
+});
+
+app.get('/api/bands/:bandname/members', async (req, res) => {
+  const bandname = req.params.bandname;
+  const band = await getBandCollection().findOne({ Bandname: bandname });
+
+  if (band) {
+    res.send(band.Members);
+  } else {
+    res.status(404).send(`Couldn't find band ${bandname}`);
   }
 });
 
