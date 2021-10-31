@@ -49,6 +49,18 @@ app.get('/api/bands/:bandname', async (req, res) => {
   }
 });
 
+app.get('/api/bands/founded/:foundingYear', async (req, res) => {
+  const foundingYear = Number(req.params.foundingYear);
+  const bands = await getBandCollection()
+    .find({ 'founding year': foundingYear })
+    .toArray();
+  if (bands) {
+    res.send(bands);
+  } else {
+    res.status(404).send(`Couldn't find a band founded in ${foundingYear}`);
+  }
+});
+
 connectDatabase(process.env.MONGODB_URL).then(() => {
   app.listen(port, () => {
     console.log('Is fertichhh');

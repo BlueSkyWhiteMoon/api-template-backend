@@ -41,3 +41,7 @@ GET http://localhost:3000/api/bands HTTP/1.1
 ### Get one band by bandname
 
 GET http://localhost:3000/api/bands/AC%2FDC HTTP/1.1
+
+### Get all bands filtered by founding year
+
+GET http://localhost:3000/api/bands/founded/1973 HTTP/1.1
