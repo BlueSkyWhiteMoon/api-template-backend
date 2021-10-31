@@ -38,6 +38,17 @@ app.get('/api/bands', async (_req, res) => {
   res.send(allBands);
 });
 
+app.get('/api/bands/:bandname', async (req, res) => {
+  const bandname = req.params.bandname;
+  const band = await getBandCollection().findOne({ Bandname: bandname });
+
+  if (band) {
+    res.send(band);
+  } else {
+    res.status(404).send(`Couldn't find band ${bandname}`);
+  }
+});
+
 connectDatabase(process.env.MONGODB_URL).then(() => {
   app.listen(port, () => {
     console.log('Is fertichhh');

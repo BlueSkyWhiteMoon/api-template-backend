@@ -34,6 +34,10 @@ Content-Type: application/json
     ]
 }
 
-### Read documents
+### Get all bands
 
 GET http://localhost:3000/api/bands HTTP/1.1
+
+### Get one band by bandname
+
+GET http://localhost:3000/api/bands/AC%2FDC HTTP/1.1
