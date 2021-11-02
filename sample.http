@@ -1,0 +1,82 @@
+### PUSH Data into Database
+POST http://localhost:3000/api/bands HTTP/1.1
+Content-Type: application/json
+
+{
+    "Bandname": "AC/DC",
+    "Genre": ["Hard-Rock", "Blues-Rock", "Rock'n Roll"],
+    "founding year": 1973,
+    "Members": [
+        {"name": "Brian Johnsson",
+         "birthyear": 1947,
+         "position": ["vocals"]
+        },
+
+        {"name": "Angus Young",
+         "birthyear": 1955,
+         "position": ["lead-guitar"]
+        },
+
+        {"name": "Stevie Young",
+         "birthyear": 1956,
+         "position": ["rhythm-guitar"]
+        },
+        
+        {"name": "Phil Rudd",
+         "birthyear": 1954,
+         "position": ["drums"]
+        },
+
+        {"name": "Cliff Wilson",
+         "birthyear": 1949,
+         "position": ["bass"]
+        }
+    ]
+}
+
+### Get all bands with a certain genre
+
+GET http://localhost:3000/api/bands/Hard-Rock HTTP/1.1
+
+### Delete members of different bands
+
+PATCH http://localhost:3000/api/bands/AC%2fDC/Jeffrey%20Jeff 
+
+### update Bandmembers
+PATCH http://localhost:3000/api/bands/AC%2fDC/members HTTP/1.1
+Content-Type: application/json
+
+{
+    "Members":{"name": "Jeffrey Jeff",
+               "birthyear": 1950,
+               "position": "vocals"}
+}
+
+### Get all bands
+
+GET http://localhost:3000/api/bands HTTP/1.1
+
+### Get one band by bandname
+
+GET http://localhost:3000/api/bands/AC%2FDC HTTP/1.1
+
+### Get all bands filtered by founding year
+
+GET http://localhost:3000/api/bands/founded/1973 HTTP/1.1
+
+### Get all band members
+
+GET http://localhost:3000/api/bands/AC%2FDC/members HTTP/1.1
+
+### Delete one band
+
+DELETE http://localhost:3000/api/bands/AC%2FDC HTTP/1.1
+
+### Update Genre
+
+PATCH http://localhost:3000/api/bands/AC%2FDC/Genre HTTP/1.1
+Content-Type: application/json
+
+{
+    "Genre": "Rap"
+}
